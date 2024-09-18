@@ -81,26 +81,35 @@
 
 
     <main class="form-signin w-100 m-auto">
-        <form>
+        <form action="/login/autenticar" method="POST" enctype="application/x-www-form-urlencoded">
+            @csrf
             <img class="mb-4" src="../img/EMS.png" alt="" width="72" height="57">
-            <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+            <h1 class="h3 mb-3 fw-normal">Por favor Faça Login</h1>
 
             <div class="form-floating">
-                <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-                <label for="floatingInput">Email address</label>
+                <input type="email" class="form-control" id="floatingInput" name="txtEmail"
+                    placeholder="name@example.com">
+                <label for="floatingInput">Email</label>
             </div>
-            <div class="form-floating">
-                <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-                <label for="floatingPassword">Password</label>
+            <div class="form-floating mt-1">
+                <input type="password" class="form-control" id="floatingPassword" name="txtSenha"
+                    placeholder="Password">
+                <label for="floatingPassword">Senha</label>
             </div>
 
             <div class="form-check text-start my-3">
-                <input class="form-check-input" type="checkbox" value="remember-me" id="flexCheckDefault">
+                <input class="form-check-input" type="checkbox" value="S" name="txtCheckbox" id="flexCheckDefault">
                 <label class="form-check-label" for="flexCheckDefault">
-                    Remember me
+                    Lembre-me
                 </label>
             </div>
-            <button class="btn btn-primary w-100 py-2" type="submit">Logar</button>
+            @if (session('error'))
+                <div class="alert alert-{{session('error')['alert']}}">
+                    {{ session('error')['mensagem'] }}
+                </div>
+            @endif
+
+            <button class="btn btn-primary w-100 py-2" type="submit">Entrar</button>
             <p class="mt-5 mb-3 text-body-secondary">&copy; 2024</p>
         </form>
     </main>
